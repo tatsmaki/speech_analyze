@@ -9,6 +9,5 @@ export const StyledNavigation = styled.nav`
     width: 50%;
     margin: 10px;
     padding: 10px;
-    border: 1px black solid;
   }
 `

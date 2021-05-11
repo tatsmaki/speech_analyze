@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const StyledRecordPage = styled.div`
+export const StyledRecognizePage = styled.div`
   width: 100vw;
   height: 90vh;
   display: flex;
