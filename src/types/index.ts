@@ -2,17 +2,23 @@ export type Record = {
   key: number
   person: string
   voice: Blob
-  signal: Array<number>
+  histogram: Array<number>
+  value: number
 }
 
 export interface RootStoreInterface {
   records: Array<Record>
+  histogram: Array<number>
+  value: number
   createRecord: (newRecord: Record) => void
+  setHistogram: (histogram: number[]) => void
+  setValue: (value: number) => void
 }
 
 export type RecordedDataType = {
   record: Blob
-  signal: Array<number>
+  histogram: Array<number>
+  value: number
 }
 
 export interface RecorderInterface {

@@ -11,13 +11,15 @@ const RecordsList = inject('rootStore')(
     (props: any) => {
       const [isPlaying, setIsPlaying] = useState(null)
 
-      const { rootStore: { records } } = props
+      const { rootStore, isRecognize } = props
+      const { records, value } = rootStore
 
-      const playRecord = (record: Blob, key: number) => {
-        const audioURL = URL.createObjectURL(record)
+      const playRecord = (record: Record) => {
+        const audioURL = URL.createObjectURL(record.voice)
         const audio = new Audio(audioURL)
 
-        setIsPlaying(key)
+        rootStore.setHistogram(record.histogram)
+        setIsPlaying(record.key)
         audio.play()
 
         audio.onended = () => {
@@ -33,7 +35,16 @@ const RecordsList = inject('rootStore')(
                 <span className="key">{record.key + 1}</span>
                 <span>{record.person}</span>
               </span>
-              <IconButton onClick={() => playRecord(record.voice, record.key)} color="primary">
+              {isRecognize && (
+                <span>
+                  {
+                    `${
+                    (Math.min(value, record.value) / Math.max(value, record.value) * 100).toFixed()
+                    }%`
+                  }
+                </span>
+              )}
+              <IconButton onClick={() => playRecord(record)} color="primary">
                 <PlayArrow />
               </IconButton>
             </StyledRecord>
